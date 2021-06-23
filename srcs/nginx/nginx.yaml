@@ -1,0 +1,45 @@
+apiVersion: apps/v1 #version of API
+kind: Deployment #type of resorce
+metadata:
+  labels:
+    app: nginx-metallb
+  name: nginx-metallb
+spec:
+  replicas: 1
+  selector: #which pod you start.
+    matchLabels:
+      app: nginx-metallb
+  template: #under this line is pod template
+    metadata:
+      labels:
+        app: nginx-metallb
+    spec:
+      containers:
+      - name: nginx-metallb
+        image: my-nginx
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-metallb
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx-metallb
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+    - name: https
+      port: 443
+      targetPort: 443
+      protocol: TCP
