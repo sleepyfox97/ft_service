@@ -13,7 +13,7 @@ RUN set -eux; \
 RUN set -eux; \
         mkdir -p /var/run/nginx
 
-COPY srcs/nginx.conf /etc/nginx/conf.d/default.conf
+COPY srcs/nginx.conf /etc/nginx/http.d/default.conf
 COPY srcs/index.html /var/www/localhost/index.html
 RUN chmod 644 /var/www/localhost/index.html
 
@@ -29,6 +29,8 @@ RUN set -eux; \
         -subj "/C=JP/ST=Tokyo/L=Minato/O=42Tokyo/OU=student/CN=localhost"
 
 COPY srcs/setup.sh /tmp/
+
+RUN chown -R nginx:nginx /etc/nginx
 
 # execution permission is needed
 RUN chmod +x /tmp/setup.sh
