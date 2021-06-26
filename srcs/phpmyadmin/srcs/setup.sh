@@ -1,5 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
-echo phpmyadmin start""
-nginx -g "daemon off;" && php-fpm7
-
+echo "phpmyadmin start"
+php-fpm7
+nginx -g "daemon off;" 

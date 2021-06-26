@@ -58,11 +58,10 @@ RUN rm -rf /var/cache/apk/*
 
 COPY ./srcs/setup.sh /tmp/
 
-COPY ./srcs/default.conf /etc/nginx/http.d/default.conf
+COPY ./srcs/default.conf /etc/nginx/conf.d/default.conf
 COPY ./srcs/config.inc.php /var/www/phpmyadmin
 
 #COPY ./srcs/info.php /var/www/phpmyadmin
-
 
 COPY ./srcs/www.conf /etc/php7/php-fmp.d
 
@@ -75,3 +74,4 @@ EXPOSE 5000
 
 RUN chmod +x /tmp/setup.sh
 CMD /tmp/setup.sh
+

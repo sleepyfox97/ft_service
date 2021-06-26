@@ -8,8 +8,11 @@ kubectl delete -f ./nginx/nginx.yaml
 kubectl delete -f ./phpmyadmin/phpmyadmin.yaml
 
 # build docker image of nginx
+
+#docker build -t baseimg ./baseimg/.
+
 docker build -t my-nginx ./nginx/.
-#docker build -t my-phpadmin ./phpmyadmin/.
+docker build -t my-phpadmin ./phpmyadmin/.
 
 # install metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
@@ -20,4 +23,4 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 # from manufest file, make resource
 kubectl apply -f ./metallb/metallb.yaml
 kubectl apply -f ./nginx/nginx.yaml
-#kubectl apply -f ./phpmyadmin/phpmyadmin.yaml
+kubectl apply -f ./phpmyadmin/phpmyadmin.yaml

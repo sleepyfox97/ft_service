@@ -20,6 +20,8 @@ spec:
         name: pypmyadmin
         ports:
         - containerPort: 5000
+          name: phpmyadmin
+
 
 ---
 apiVersion: v1
@@ -31,7 +33,9 @@ metadata:
 spec:
   type: LoadBalancer
   selector:
-    app: pypmyadmin
+    app: phpmyadmin
   ports:
-    - name: pypmyadmin
+    - name: phpmyadmin
       port: 5000
+      targetPort: 5000
+      protocol: TCP

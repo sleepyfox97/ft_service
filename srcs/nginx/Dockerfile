@@ -1,5 +1,6 @@
 FROM alpine:3.12
 
+#FROM baseimg
 LABEL com.42tokyo.vendor="sleepyfox"
 
 RUN set -eux; \
@@ -13,7 +14,7 @@ RUN set -eux; \
 RUN set -eux; \
         mkdir -p /var/run/nginx
 
-COPY srcs/nginx.conf /etc/nginx/http.d/default.conf
+COPY srcs/nginx.conf /etc/nginx/conf.d/default.conf
 COPY srcs/index.html /var/www/localhost/index.html
 RUN chmod 644 /var/www/localhost/index.html
 
