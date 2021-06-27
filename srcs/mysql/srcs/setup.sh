@@ -1,5 +1,7 @@
+F
 #!/bin/sh
 
+# if  derectory dosen't exist, mysqld can't start
 if [ ! -d "/run/mysqld" ]; then
 	mkdir -p /run/mysqld
 fi
@@ -22,7 +24,8 @@ else
 	#if [ ! -f "$tmpfile" ]; then
 	#	return 1
 	#fi
-
+	touch /tmp/sql
+	
 	cat > /tmp/sql << EOF
 USE mysql;
 FLUSH PRIVILEGES;
@@ -31,18 +34,16 @@ GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 ALTER USER 'root'@'localhost' IDENTIFIED BY '';
 EOF
 
-#	if ["$MYSQL_DATABASE" != ""]; then
-#		echo "Creating database: $MYSQL_DATABASE"
-#		echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> $tmpfile
-#		
-#		if [ "MYSQL_USER" != ""]; then
-#			echo "Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
-#			echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' INDENTIFIED BY '$MYSQL_PASSWORD';" >> $tmpfile
-#		fi
-#	fi
+	echo "Creating database: $MYSQL_DATABASE"
+	echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> /tmp/sql
+		
+	echo "Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
+	echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> /tmp/sql
+
 
 	/usr/bin/mysqld --user=root --bootstrap --verbose=0 < /tmp/sql
 	rm -f /tmp/sql
 fi
 
+#excute database
 /usr/bin/mysqld --user=root 

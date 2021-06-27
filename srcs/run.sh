@@ -6,6 +6,8 @@ kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manif
 kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
 kubectl delete -f ./nginx/nginx.yaml
 kubectl delete -f ./phpmyadmin/phpmyadmin.yaml
+kubectl delete -f ./mysql/mysql.yaml
+kubectl delete -f ./mysql/mysql-pv.yaml
 
 # build docker image of nginx
 
@@ -13,7 +15,8 @@ kubectl delete -f ./phpmyadmin/phpmyadmin.yaml
 
 docker build -t my-nginx ./nginx/.
 docker build -t my-phpadmin ./phpmyadmin/.
-
+docker build -t my-mysql ./mysql/.
+docker build -t my-wordpress ./wordpress/.
 # install metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
@@ -24,3 +27,5 @@ kubectl create secret generic -n metallb-system memberlist --from-literal=secret
 kubectl apply -f ./metallb/metallb.yaml
 kubectl apply -f ./nginx/nginx.yaml
 kubectl apply -f ./phpmyadmin/phpmyadmin.yaml
+kubectl apply -f ./mysql/mysql-pv.yaml
+kubectl apply -f ./mysql/mysql.yaml

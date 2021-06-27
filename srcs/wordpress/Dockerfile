@@ -29,7 +29,7 @@ RUN set -eux; \
         -keyout /etc/nginx/ssl/nginx-wp.key \
         -subj "/C=JP/ST=Tokyo/L=Minato/O=42Tokyo/OU=student/CN=localhost"
 
-Wordpress install 
+#Wordpress install 
 WORKDIR /tmp
 RUN set -ex; \
 	wget --no-check-certificate https://wordpress.org/latest.tar.gz; \
@@ -54,10 +54,10 @@ RUN set -ex; \
 RUN rm -rf /var/cache/apk/*
 ##kokomade base
 
-COPY wp-config.php /var/www/wordpress/
-COPY default.conf /etc/nginx/conf.d/default.conf
-COPY www.conf /etc/php7/php-fmp.d
-COPY setup.sh /tmp/setup.sh
+COPY ./srcs/wp-config.php /var/www/wordpress/
+COPY ./srcs/default.conf /etc/nginx/conf.d/default.conf
+COPY ./srcs/www.conf /etc/php7/php-fmp.d
+COPY ./srcs/setup.sh /tmp/setup.sh
 
 RUN chmod -R 755 /var /tmp /etc
 RUN chown -R nginx:nginx /etc/nginx
