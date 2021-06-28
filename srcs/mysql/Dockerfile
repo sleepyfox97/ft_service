@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 LABEL com.42tokyo.vendor="sleepyfox"
 
@@ -58,10 +58,14 @@ RUN set -eux; \
 
 COPY ./srcs/setup.sh /tmp/
 COPY ./srcs/mariadb-server.cnf /etc/my.cnf.d
+COPY ./srcs/start.sh /tmp/
 
 RUN chmod -R 755 /tmp
 
 EXPOSE 3306
 
-RUN chmod +x /tmp/setup.sh
-CMD /tmp/setup.sh 
+RUN chmod +x /tmp/start.sh
+CMD /tmp/start.sh
+
+#RUN chmod +x /tmp/setup.sh
+#CMD /tmp/setup.sh 

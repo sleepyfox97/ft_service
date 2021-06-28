@@ -6,7 +6,7 @@ if [ ! -d "/run/mysqld" ]; then
 	mkdir -p /run/mysqld
 fi
 
-if [ -d "/app/mysql" ]; then
+if [ -d "/app/mysql/ft_service" ]; then
 	echo "skip command"
 else
 	echo "creat database"
@@ -37,7 +37,7 @@ EOF
 	echo "Creating database: $MYSQL_DATABASE"
 	echo "CREATE DATABASE IF NOT EXISTS \`$MYSQL_DATABASE\` CHARACTER SET utf8 COLLATE utf8_general_ci;" >> /tmp/sql
 		
-	echo "Creating user: $MYSQL_USER with password $MYSQL_PASSWORD"
+	echo "Creating user: $MYSQL_USER with password: $MYSQL_PASSWORD"
 	echo "GRANT ALL ON \`$MYSQL_DATABASE\`.* to '$MYSQL_USER'@'%' IDENTIFIED BY '$MYSQL_PASSWORD';" >> /tmp/sql
 
 
@@ -46,4 +46,4 @@ EOF
 fi
 
 #excute database
-/usr/bin/mysqld --user=root 
+/usr/bin/mysqld --user=root --datadir=/app/mysql 

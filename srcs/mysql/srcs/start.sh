@@ -1,3 +1,2 @@
 #!/bin/sh
-
-nginx tail -f
+tail -f

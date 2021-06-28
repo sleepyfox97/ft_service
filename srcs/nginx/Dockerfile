@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 #FROM baseimg
 LABEL com.42tokyo.vendor="sleepyfox"

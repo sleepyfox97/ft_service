@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 LABEL com.42tokyo.vendor="sleepyfox"
 
@@ -42,6 +42,7 @@ RUN set -ex; \
 	wget -O phpmyadmin.tar.gz --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz; \
 	tar -xvf phpmyadmin.tar.gz; \
 	mv phpMyAdmin-5.0.2-all-languages /var/www/phpmyadmin; \
+	mkdir /var/www/phpmyadmin/tmp; \
 	rm -rf  phpmyadmin.tar.gz; 
 
 # wp-cli
@@ -65,8 +66,9 @@ COPY ./srcs/config.inc.php /var/www/phpmyadmin
 
 COPY ./srcs/www.conf /etc/php7/php-fmp.d
 
-RUN chmod -R 755 /var /etc /tmp
+RUN chmod -R 755 /var /etc
 RUN chmod -R 777 /tmp
+RUN chmod -R 777 /var/www/phpmyadmin/tmp
 
 RUN chown -R nginx:nginx /etc/nginx
 

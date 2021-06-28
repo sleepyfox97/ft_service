@@ -20,7 +20,7 @@ $cfg['blowfish_secret'] = '12345678901234567890123456789012'; /* YOU MUST FILL I
 /**
  * Servers configuration
  */
-$i = 1;
+$i = 0;
 
 /**
  * First server

@@ -8,15 +8,15 @@ kubectl delete -f ./nginx/nginx.yaml
 kubectl delete -f ./phpmyadmin/phpmyadmin.yaml
 kubectl delete -f ./mysql/mysql.yaml
 kubectl delete -f ./mysql/mysql-pv.yaml
+kubectl delete -f ./wordpress/wordpress.yaml
 
-# build docker image of nginx
 
 #docker build -t baseimg ./baseimg/.
-
 docker build -t my-nginx ./nginx/.
 docker build -t my-phpadmin ./phpmyadmin/.
 docker build -t my-mysql ./mysql/.
-docker build -t my-wordpress ./wordpress/.
+#docker build -t my-wordpress ./wordpress/.
+
 # install metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/metallb.yaml
@@ -29,3 +29,4 @@ kubectl apply -f ./nginx/nginx.yaml
 kubectl apply -f ./phpmyadmin/phpmyadmin.yaml
 kubectl apply -f ./mysql/mysql-pv.yaml
 kubectl apply -f ./mysql/mysql.yaml
+#kubectl apply -f ./wordpress/wordpress.yaml
