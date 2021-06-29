@@ -64,8 +64,8 @@ RUN chmod -R 755 /tmp
 
 EXPOSE 3306
 
-RUN chmod +x /tmp/start.sh
-CMD /tmp/start.sh
+#RUN chmod +x /tmp/start.sh
+#CMD /tmp/start.sh
 
-#RUN chmod +x /tmp/setup.sh
-#CMD /tmp/setup.sh 
+RUN chmod +x /tmp/setup.sh
+CMD /tmp/setup.sh 
