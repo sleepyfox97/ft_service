@@ -68,23 +68,11 @@ RUN set -eux; \
 RUN rm -rf /var/cache/apk/*
 ##kokomade base
 
-RUN adduser -D ftp-user && echo 'ftp-user:ftp-user' | chpasswd
-
-RUN mkdir -p /var/www/ftp_dir \
-    chown ftp-user /var/www/ftp_dir \
-    chmod 755 /var/www/ftp_dir
-
-RUN mkdir -p /etc/vsftpd/user_conf
-
-RUN touch /var/log/vsftpd.log
-
 COPY ./srcs/setup.sh /tmp/setup.sh
+COPY ./srcs/defaults.ini /grafana/custom.ini
 
-COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
-COPY ./srcs/chroot_list /etc/vsftpd/chroot_list
+RUN chmod +x /tmp/setup.sh
+RUN chmod -R 755 /tmp
 
-RUN chmod -R 777 /tmp /var /etc
-EXPOSE 20 21 60000
-
-WORKDIR /
+EXPOSE 3000
 CMD /tmp/setup.sh

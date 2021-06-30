@@ -9,13 +9,15 @@ kubectl delete -f ./phpmyadmin/phpmyadmin.yaml
 kubectl delete -f ./mysql/mysql.yaml
 kubectl delete -f ./mysql/mysql-pv.yaml
 kubectl delete -f ./wordpress/wordpress.yaml
-
+kubectl delete -f ./ftps/ftps.yaml
+kubectl delete -f ./ftps/ftps-pv.yaml 
 
 #docker build -t baseimg ./baseimg/.
 docker build -t my-nginx ./nginx/.
 docker build -t my-phpadmin ./phpmyadmin/.
 docker build -t my-mysql ./mysql/.
-#docker build -t my-wordpress ./wordpress/.
+docker build -t my-wordpress ./wordpress/.
+docker build -t my-ftps ./ftps/.
 
 # install metallb
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manifests/namespace.yaml
@@ -29,4 +31,12 @@ kubectl apply -f ./nginx/nginx.yaml
 kubectl apply -f ./phpmyadmin/phpmyadmin.yaml
 kubectl apply -f ./mysql/mysql-pv.yaml
 kubectl apply -f ./mysql/mysql.yaml
-#kubectl apply -f ./wordpress/wordpress.yaml
+kubectl apply -f ./wordpress/wordpress.yaml
+kubectl apply -f ./ftps/ftps.yaml
+
+if [ ! -d "data/ftp-user"]; then
+	sudo mkdir -p /data/ftp-user
+	sudo chmod 777 /data/ftp-user
+fi
+
+kubectl apply -f ./ftps/ftps-pv.yaml

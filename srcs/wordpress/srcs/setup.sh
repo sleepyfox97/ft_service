@@ -9,6 +9,15 @@ wp core intall --allow-root \
 	--admin_password=fox \
 	--admin_emal=khiroshi@student.42tokyo.jp
 
+db=$?
+echo ">wordpress database :$db"
+if [ $db -ne 0]; then
+	echo "You should wait mysql pod start"
+	return 1
+else
+	echo "It's time to start Mysql"
+fi
+
 wp user create --allow-root \
 	user01 \
 	user01@42tokyo.jp \
@@ -24,19 +33,19 @@ wp user create --allow-root \
 wp user create --allow-root \
 	user03 \
 	user03@42tokyo.jp \
-	--role=subscriber \
+	--role=contributor \
 	--user_pass=user03
 
 wp user create --allow-root \
 	user03 \
 	user03@42tokyo.jp \
-	--role=subscriber \
+	--role=author \
 	--user_pass=user03
 
 wp user create --allow-root \
 	user04 \
 	user04@42tokyo.jp \
-	--role=subscriber \
+	--role=editor \
 	--user_pass=user04
 
 nginx && php-fpm7

@@ -37,8 +37,8 @@ RUN set -eux; \
         -sha256 \
         -days 365 \
         -nodes \
-        -out /etc/nginx/ssl/ft_service.crt \
-        -keyout /etc/nginx/ssl/ft_service.key \
+        -out /etc/ssl/nginx/ft_service.crt \
+        -keyout /etc/ssl/nginx/ft_service.key \
         -subj "/C=JP/ST=Tokyo/L=Minato/O=42Tokyo/OU=student/CN=localhost"
 
 # Wordpress install 
@@ -68,23 +68,14 @@ RUN set -eux; \
 RUN rm -rf /var/cache/apk/*
 ##kokomade base
 
-RUN adduser -D ftp-user && echo 'ftp-user:ftp-user' | chpasswd
-
-RUN mkdir -p /var/www/ftp_dir \
-    chown ftp-user /var/www/ftp_dir \
-    chmod 755 /var/www/ftp_dir
-
-RUN mkdir -p /etc/vsftpd/user_conf
-
-RUN touch /var/log/vsftpd.log
-
 COPY ./srcs/setup.sh /tmp/setup.sh
+COPY ./srcs/influxdb.conf /etc/influxdb.conf
 
-COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
-COPY ./srcs/chroot_list /etc/vsftpd/chroot_list
+RUN mkdir -p /etc/ssl
 
-RUN chmod -R 777 /tmp /var /etc
-EXPOSE 20 21 60000
+RUN cp /etc/nginx/ssl/ft_service.crt /etc/ssl/ft_service.crt
+RUN cp /etc/nginx/ssl/ft_service.key /etc/ssl/ft_service.key
+RUN chmod -R 777 /etc/ssl /tmp
 
-WORKDIR /
+EXPOSE 8086
 CMD /tmp/setup.sh

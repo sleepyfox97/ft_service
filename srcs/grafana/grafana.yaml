@@ -1,0 +1,38 @@
+apiVersion: apps/v1 #version of API
+kind: Deployment #type of resorce
+metadata:
+  labels:
+    app: grafana
+  name: grafana
+spec:
+  replicas: 1
+  selector: #which pod you start.
+    matchLabels:
+      app: grafana
+  template: #under this line is pod template
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: my-grafana
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  annotations:
+    metallb.universe.tf/allow-shared-ip: "ft_service"
+spec:
+  type: LoadBalancer
+  selector:
+    app: grafana
+  ports:
+    - port: 3000
+      targetPort: 3000
