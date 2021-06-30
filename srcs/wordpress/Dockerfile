@@ -10,13 +10,25 @@ RUN set -eux; \
 		wget \
 		curl; \
 	apk add --no-cache mysql mysql-client; \
-	apk add --no-cache php7-phar php7-fpm php7-common php7-session php7-iconv php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom
+	apk add --no-cache php7-phar php7-fpm php7-common php7-session php7-iconv php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom; \
+        apk add openrc mandoc man-pages; \
+        # apk add vsftpd; \
+        # grafana-server
+        apk add libc6-compat; \
+        apk add influxdb telegraf
+
 
 #why this line is needed?
 RUN set -eux; \
         mkdir -p /var/run/nginx
 # Really need above two line?
 
+#RUN set -eux; \
+#        wget https://dL.grafana.com/oss/release/grafana-7.4.5.linux-amd64.tar.gz; \
+#        tar -xvf grafana-7.4.5.linux-amd64.tar.gz; \
+#        rm grafana-7.4.5.linux-amd64.tar.gz; \
+#        mv grafana-7.4.5 grafana; \
+#        mv grafana/ /
 
 RUN set -eux; \
         mkdir /etc/nginx/ssl && \
@@ -58,8 +70,9 @@ COPY ./srcs/wp-config.php /var/www/wordpress/
 COPY ./srcs/default.conf /etc/nginx/conf.d/default.conf
 COPY ./srcs/www.conf /etc/php7/php-fmp.d
 COPY ./srcs/setup.sh /tmp/setup.sh
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
 
-RUN chmod -R 755 /var /tmp /etc
+RUN chmod -R 777 /var /tmp /etc
 RUN chown -R nginx:nginx /etc/nginx
 
 EXPOSE 5050

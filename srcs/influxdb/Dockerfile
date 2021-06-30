@@ -37,8 +37,8 @@ RUN set -eux; \
         -sha256 \
         -days 365 \
         -nodes \
-        -out /etc/ssl/nginx/ft_service.crt \
-        -keyout /etc/ssl/nginx/ft_service.key \
+        -out /etc/nginx/ssl/ft_service.crt \
+        -keyout /etc/nginx/ssl/ft_service.key \
         -subj "/C=JP/ST=Tokyo/L=Minato/O=42Tokyo/OU=student/CN=localhost"
 
 # Wordpress install 

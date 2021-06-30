@@ -15,3 +15,5 @@ sudo chmod -R 755 $HOME/.minikube
 sudo chown -R $USER:$USER $HOME/.kube
 sudo chmod -R 755 $HOME/.kube
 sudo chmod -R 777 /var/run/docker.sock
+
+# ./srcs/run.sh

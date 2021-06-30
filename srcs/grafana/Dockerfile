@@ -70,6 +70,8 @@ RUN rm -rf /var/cache/apk/*
 
 COPY ./srcs/setup.sh /tmp/setup.sh
 COPY ./srcs/defaults.ini /grafana/custom.ini
+COPY dashboards /grafana/conf/provisioning/dashboards
+COPY datasources /grafana/conf/provisioning/datasources
 
 RUN chmod +x /tmp/setup.sh
 RUN chmod -R 755 /tmp

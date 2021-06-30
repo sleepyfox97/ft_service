@@ -50,6 +50,7 @@ wp user create --allow-root \
 
 nginx && php-fpm7
 echo "wordpress start"
-tail -f /var/log/nginx/access.log
+telegraf -config /etc/telegraf.conf
+#tail -f /var/log/nginx/access.log
 
 

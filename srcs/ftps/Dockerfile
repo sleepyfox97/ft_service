@@ -17,12 +17,12 @@ RUN set -eux; \
 	apk add libc6-compat; \
 	apk add influxdb telegraf
 	
-RUN set -eux; \
-	wget https://dL.grafana.com/oss/release/grafana-7.4.5.linux-amd64.tar.gz; \
-	tar -xvf grafana-7.4.5.linux-amd64.tar.gz; \
-	rm grafana-7.4.5.linux-amd64.tar.gz; \
-	mv grafana-7.4.5 grafana; \
-	mv grafana/ /
+#RUN set -eux; \
+#        wget https://dL.grafana.com/oss/release/grafana-7.4.5.linux-amd64.tar.gz; \
+#        tar -xvf grafana-7.4.5.linux-amd64.tar.gz; \
+#        rm grafana-7.4.5.linux-amd64.tar.gz; \
+#        mv grafana-7.4.5 grafana; \
+#        mv grafana/ /
 
 #why this line is needed?
 RUN set -eux; \
@@ -82,6 +82,7 @@ COPY ./srcs/setup.sh /tmp/setup.sh
 
 COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY ./srcs/chroot_list /etc/vsftpd/chroot_list
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
 
 RUN chmod -R 777 /tmp /var /etc
 EXPOSE 20 21 60000
