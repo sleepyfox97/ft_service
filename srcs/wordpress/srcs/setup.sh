@@ -48,9 +48,9 @@ wp user create --allow-root \
 	--role=editor \
 	--user_pass=user04
 
+telegraf -config /etc/telegraf.conf &
 nginx && php-fpm7
 echo "wordpress start"
-telegraf -config /etc/telegraf.conf
-#tail -f /var/log/nginx/access.log
+tail -f /var/log/nginx/access.log
 
 

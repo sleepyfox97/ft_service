@@ -9,3 +9,51 @@ datasources:
     database: ftps
     editable: true
     version: 1
+  - name: wordpress
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: wordpress
+    editable: true
+    version: 1
+  - name: grafana
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: grafana
+    editable: true
+    version: 1
+  - name: phpmyadmin
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: phpmyadmin
+    editable: true
+    version: 1
+  - name: nginx
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: nginx
+    editable: true
+    version: 1
+  - name: mysql
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: mysql
+    editable: true
+    version: 1
+  - name: influxdb
+    type: influxdb
+    access: proxy
+    orgId: 1
+    url: http://influxdb:8086
+    database: influxdb
+    editable: true
+    version: 1

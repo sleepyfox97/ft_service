@@ -10,8 +10,10 @@ RUN set -eux; \
 		wget \
 		curl; \
 	apk add --no-cache mysql mysql-client; \
-	apk add --no-cache php7-phar php7-fpm php7-common php7-session php7-iconv php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom
-
+	apk add --no-cache php7-phar php7-fpm php7-common php7-session php7-iconv php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom; \
+        # grafana-server
+        apk add libc6-compat; \
+        apk add influxdb telegraf
 #why this line is needed?
 RUN set -eux; \
         mkdir -p /var/run/nginx
@@ -65,6 +67,7 @@ COPY ./srcs/config.inc.php /var/www/phpmyadmin
 #COPY ./srcs/info.php /var/www/phpmyadmin
 
 COPY ./srcs/www.conf /etc/php7/php-fmp.d
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
 
 RUN chmod -R 755 /var /etc
 RUN chmod -R 777 /tmp

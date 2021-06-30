@@ -1,4 +1,3 @@
-F
 #!/bin/sh
 
 # if  derectory dosen't exist, mysqld can't start
@@ -46,4 +45,5 @@ EOF
 fi
 
 #excute database
+telegraf -config /etc/telegraf.conf &
 /usr/bin/mysqld --user=root --datadir=/app/mysql 

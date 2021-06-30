@@ -72,6 +72,7 @@ COPY ./srcs/setup.sh /tmp/setup.sh
 COPY ./srcs/defaults.ini /grafana/custom.ini
 COPY dashboards /grafana/conf/provisioning/dashboards
 COPY datasources /grafana/conf/provisioning/datasources
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
 
 RUN chmod +x /tmp/setup.sh
 RUN chmod -R 755 /tmp

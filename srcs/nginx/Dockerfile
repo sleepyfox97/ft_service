@@ -8,7 +8,10 @@ RUN set -eux; \
         apk add --no-cache \
                 nginx \
                 openssl \
-                openssh
+                openssh; \
+	# grafana-server
+        apk add libc6-compat; \
+        apk add influxdb telegraf
 
 #why this line is needed?
 RUN set -eux; \
@@ -29,6 +32,7 @@ RUN set -eux; \
         -keyout /etc/nginx/ssl/nginx-ssl.key \
         -subj "/C=JP/ST=Tokyo/L=Minato/O=42Tokyo/OU=student/CN=localhost"
 
+COPY srcs/telegraf.conf ./etc/telegraf.conf
 COPY srcs/setup.sh /tmp/
 
 RUN chown -R nginx:nginx /etc/nginx
