@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 8,
   "links": [],
   "panels": [
     {
@@ -23,7 +23,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "pypmyadmin",
+      "datasource": "phpmyadmin",
       "fieldConfig": {
         "defaults": {
           "custom": {}
@@ -157,7 +157,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "phpmyadmin",
-  "uid": "dnXHEJk7z",
+  "title": "PHMYADMIN",
+  "uid": "n2Ntvak7z",
   "version": 1
 }

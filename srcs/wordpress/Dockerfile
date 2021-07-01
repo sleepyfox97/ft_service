@@ -11,24 +11,13 @@ RUN set -eux; \
 		curl; \
 	apk add --no-cache mysql mysql-client; \
 	apk add --no-cache php7-phar php7-fpm php7-common php7-session php7-iconv php7-json php7-gd php7-curl php7-xml php7-mysqli php7-imap php7-cgi fcgi php7-pdo php7-pdo_mysql php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap php7-ctype php7-dom; \
-        apk add openrc mandoc man-pages; \
-        # apk add vsftpd; \
         # grafana-server
         apk add libc6-compat; \
         apk add influxdb telegraf
 
 
-#why this line is needed?
 RUN set -eux; \
         mkdir -p /var/run/nginx
-# Really need above two line?
-
-#RUN set -eux; \
-#        wget https://dL.grafana.com/oss/release/grafana-7.4.5.linux-amd64.tar.gz; \
-#        tar -xvf grafana-7.4.5.linux-amd64.tar.gz; \
-#        rm grafana-7.4.5.linux-amd64.tar.gz; \
-#        mv grafana-7.4.5 grafana; \
-#        mv grafana/ /
 
 RUN set -eux; \
         mkdir /etc/nginx/ssl && \
@@ -48,12 +37,6 @@ RUN set -ex; \
 	tar -xvf latest.tar.gz; \
 	rm -rf latest.tar.gz; \
 	mv wordpress /var/www/wordpress; 
-
-RUN set -ex; \
-	wget -O phpmyadmin.tar.gz --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz; \
-	tar -xvf phpmyadmin.tar.gz; \
-	mv phpMyAdmin-5.0.2-all-languages /var/www/phpmyadmin; \
-	rm -rf  phpmyadmin.tar.gz; 
 
 # wp-cli
 # for Wordpress user add by command
@@ -81,4 +64,9 @@ EXPOSE 5050
 
 WORKDIR /
 RUN chmod +x /tmp/setup.sh
+
+COPY ./srcs/start.sh /tmp/start.sh
+RUN chmod +x /tmp/start.sh
+#CMD /tmp/start.sh
+
 CMD /tmp/setup.sh

@@ -14,11 +14,9 @@ RUN set -eux; \
         # grafana-server
         apk add libc6-compat; \
         apk add influxdb telegraf
-#why this line is needed?
+
 RUN set -eux; \
         mkdir -p /var/run/nginx
-# Really need above two line?
-
 
 RUN set -eux; \
         mkdir /etc/nginx/ssl && \
@@ -31,28 +29,12 @@ RUN set -eux; \
         -keyout /etc/nginx/ssl/nginx-php.key \
         -subj "/C=JP/ST=Tokyo/L=Minato/O=42Tokyo/OU=student/CN=localhost"
 
-# Wordpress install 
-# WORKDIR /tmp
-# RUN set -ex; \
-#	wget --no-check-certificate https://wordpress.org/latest.tar.gz; \
-#	tar -xvf latest.tar.gz; \
-#	rm -rf latest.tar.gz; \
-#	mv wordpress /var/www/wordpress; 
-	#mv wp-config.php /var/www/html/wordpress; \
-
 RUN set -ex; \
 	wget -O phpmyadmin.tar.gz --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz; \
 	tar -xvf phpmyadmin.tar.gz; \
 	mv phpMyAdmin-5.0.2-all-languages /var/www/phpmyadmin; \
 	mkdir /var/www/phpmyadmin/tmp; \
 	rm -rf  phpmyadmin.tar.gz; 
-
-# wp-cli
-# for Wordpress user add by command
-# RUN set -ex; \
-#	curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar; \
-#	chmod +x wp-cli.phar; \
-#	mv wp-cli.phar /usr/local/bin/wp
 
 
 RUN rm -rf /var/cache/apk/*

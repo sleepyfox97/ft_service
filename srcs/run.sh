@@ -39,7 +39,8 @@ kubectl apply -f ./mysql/mysql.yaml
 kubectl apply -f ./wordpress/wordpress.yaml
 kubectl apply -f ./ftps/ftps.yaml
 kubectl apply -f ./ftps/ftps-pv.yaml
-if [ ! -d "data/ftp-user"]; then
+
+if [ ! -d "data/ftp-user" ]; then
 	sudo mkdir -p /data/ftp-user
 	sudo chmod 777 /data/ftp-user
 fi
