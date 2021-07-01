@@ -1,6 +1,7 @@
 #!/bin/sh
 
 sudo sysctl fs.protected_regular=0
+
 #eval $(minikube -p minikube docker-env)
 
 # delete minikube status if run in your environmet
@@ -16,4 +17,4 @@ sudo chown -R $USER:$USER $HOME/.kube
 sudo chmod -R 755 $HOME/.kube
 sudo chmod -R 777 /var/run/docker.sock
 
-# ./srcs/run.sh
+./srcs/run.sh

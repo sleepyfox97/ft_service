@@ -25,7 +25,6 @@ RUN rm -rf /var/cache/apk/*
 
 COPY ./srcs/setup.sh /tmp/
 COPY ./srcs/mariadb-server.cnf /etc/my.cnf.d
-COPY ./srcs/start.sh /tmp/
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
 COPY ./srcs/liveness.sh /tmp/liveness.sh
 

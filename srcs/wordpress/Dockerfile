@@ -65,8 +65,4 @@ EXPOSE 5050
 WORKDIR /
 RUN chmod +x /tmp/setup.sh
 
-COPY ./srcs/start.sh /tmp/start.sh
-RUN chmod +x /tmp/start.sh
-#CMD /tmp/start.sh
-
 CMD /tmp/setup.sh
