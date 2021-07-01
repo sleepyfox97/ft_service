@@ -69,6 +69,7 @@ RUN rm -rf /var/cache/apk/*
 COPY ./srcs/setup.sh /tmp/setup.sh
 COPY ./srcs/influxdb.conf /etc/influxdb.conf
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
+COPY ./srcs/liveness.sh /tmp/liveness.sh
 RUN mkdir -p /etc/ssl
 
 RUN cp /etc/nginx/ssl/ft_service.crt /etc/ssl/ft_service.crt

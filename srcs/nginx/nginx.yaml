@@ -2,22 +2,28 @@ apiVersion: apps/v1 #version of API
 kind: Deployment #type of resorce
 metadata:
   labels:
-    app: nginx-metallb
-  name: nginx-metallb
+    app: nginx
+  name: nginx
 spec:
   replicas: 1
   selector: #which pod you start.
     matchLabels:
-      app: nginx-metallb
+      app: nginx
   template: #under this line is pod template
     metadata:
       labels:
-        app: nginx-metallb
+        app: nginx
     spec:
       containers:
-      - name: nginx-metallb
+      - name: nginx
         image: my-nginx
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+            command: ["sh", "tmp/liveness.sh"]
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 30
         ports:
         - containerPort: 80
           name: http
@@ -29,13 +35,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-metallb
+  name: nginx
   annotations:
     metallb.universe.tf/allow-shared-ip: "ft_service"
 spec:
   type: LoadBalancer
   selector:
-    app: nginx-metallb
+    app: nginx
   ports:
     - name: http
       port: 80

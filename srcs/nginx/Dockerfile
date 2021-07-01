@@ -34,11 +34,13 @@ RUN set -eux; \
 
 COPY srcs/telegraf.conf ./etc/telegraf.conf
 COPY srcs/setup.sh /tmp/
+COPY srcs/liveness.sh /tmp/liveness.sh
 
 RUN chown -R nginx:nginx /etc/nginx
 
 # execution permission is needed
 RUN chmod +x /tmp/setup.sh
+RUN chmod +x /tmp/liveness.sh
 CMD /tmp/setup.sh
 
 # port

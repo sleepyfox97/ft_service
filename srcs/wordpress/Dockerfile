@@ -71,6 +71,7 @@ COPY ./srcs/default.conf /etc/nginx/conf.d/default.conf
 COPY ./srcs/www.conf /etc/php7/php-fmp.d
 COPY ./srcs/setup.sh /tmp/setup.sh
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
+COPY ./srcs/liveness.sh /tmp/liveness.sh
 
 RUN chmod -R 777 /var /tmp /etc
 RUN chown -R nginx:nginx /etc/nginx

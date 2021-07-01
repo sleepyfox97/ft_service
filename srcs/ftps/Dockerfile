@@ -83,7 +83,9 @@ COPY ./srcs/setup.sh /tmp/setup.sh
 COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
 COPY ./srcs/chroot_list /etc/vsftpd/chroot_list
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
+COPY ./srcs/liveness.sh /liveness.sh
 
+RUN chmod +x /liveness.sh
 RUN chmod -R 777 /tmp /var /etc
 EXPOSE 20 21 60000
 

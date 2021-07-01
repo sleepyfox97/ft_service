@@ -60,7 +60,7 @@ RUN rm -rf /var/cache/apk/*
 
 
 COPY ./srcs/setup.sh /tmp/
-
+COPY ./srcs/liveness.sh /tmp/liveness.sh
 COPY ./srcs/default.conf /etc/nginx/conf.d/default.conf
 COPY ./srcs/config.inc.php /var/www/phpmyadmin
 

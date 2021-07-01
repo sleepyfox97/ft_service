@@ -20,6 +20,12 @@ spec:
       - image: my-mysql
         imagePullPolicy: Never
         name: mysql
+        livenessProbe:
+          exec:
+            command: ["sh", "tmp/liveness.sh"]
+          initialDelaySeconds: 30
+          timeoutSeconds: 10
+          periodSeconds: 30
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: root
